@@ -2,8 +2,9 @@ const express = require('express');
 const { MongoClient, ObjectId, ClientSession } = require('mongodb'); //ObjectId: Para poder trabajar con id
 const bodyparser = require('body-parser');
 
-const uri =
-    'mongodb+srv://jesus3928cf:1234@cluster0.6sahaj9.mongodb.net/?retryWrites=true&w=majority';
+require("dotenv").config();
+
+const uri = process.env.URL;
 
 const router = express.Router();
 

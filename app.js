@@ -18,7 +18,7 @@ app.use(express.json()); //para poder trabajar con json
 /// Usando la función que disecciona nuestras peticiones
 routerApi(app);
 
-const port = process.env.PORT;
+const port = process.env.PORT || 4000;
 
 app.get('/', (req, res) => {
     res.status(200).send('API de peliculas');

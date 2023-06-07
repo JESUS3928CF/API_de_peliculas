@@ -105,22 +105,22 @@ router.post('/', async (req, res) => {
 
 //3. UPDATE
 // updateOne() Actualizamos solo un campo
-router.patch('/:id', async (req, res) => {
-    const id = req.params.id;
-    const {title, year} = req.body;
+// router.patch('/:id', async (req, res) => {
+//     const id = req.params.id;
+//     const {title, year} = req.body;
 
-    const resultado = await service.actualizarPelicula(id, title, year);
+//     const resultado = await service.actualizarPelicula(id, title, year);
 
-    if (result) {
-        res.status(200).json({
-            message: 'Se actualizo la pelicula',
-            result,
-            //data: body
-        });
-    } else {
-        res.status(400).send('No se actualizo la pelicula');
-    }
-});
+//     if (result) {
+//         res.status(200).json({
+//             message: 'Se actualizo la pelicula',
+//             result,
+//             //data: body
+//         });
+//     } else {
+//         res.status(400).send('No se actualizo la pelicula');
+//     }
+// });
 
 // DELETE
 // deleteOne() Actualizamos solo un documento

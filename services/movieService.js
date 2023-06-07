@@ -33,25 +33,25 @@ class MovieService {
     }
   }
 
-  async actualizarPelicula(id,title, year){
+  // async actualizarPelicula(id,title, year){
     
-    try {
-      await client.connect();
-      const result = await client
-          .db('sample_mflix')
-          .collection('movies')
-          .updateOne(
-              { _id: new ObjectId(id) },
-              { $set: { title: title, year: year } }
-          );
+  //   try {
+  //     await client.connect();
+  //     const result = await client
+  //         .db('sample_mflix')
+  //         .collection('movies')
+  //         .updateOne(
+  //             { _id: new ObjectId(id) },
+  //             { $set: { title: title, year: year } }
+  //         );
 
-      return result;
-  } catch (e) {
-      console.log(e);
-  } finally {
-      await client.close();
-  }
-  }
+  //     return result;
+  // } catch (e) {
+  //     console.log(e);
+  // } finally {
+  //     await client.close();
+  // }
+  // }
 }
 
 module.exports = MovieService;
