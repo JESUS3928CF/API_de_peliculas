@@ -1,7 +1,7 @@
 const express = require('express');
 const { MongoClient, ObjectId, ClientSession } = require('mongodb'); //ObjectId: Para poder trabajar con id
 const bodyparser = require('body-parser');
-
+require("dotenv").config();
 /// Funciones para llamar las rutas
 const routerApi = require("./routes/index");
 
@@ -18,7 +18,7 @@ app.use(express.json()); //para poder trabajar con json
 /// Usando la función que disecciona nuestras peticiones
 routerApi(app);
 
-const port = 3000;
+const port = process.env.PORT;
 
 app.get('/', (req, res) => {
     res.status(200).send('API de peliculas');

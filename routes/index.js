@@ -3,6 +3,7 @@ const routesSessions = require('./routesSessions');
 const routesMovies = require('./routesMovies');
 const routesTheaters = require('./routesTheaters');
 const routesUsers = require('./routesUsers');
+// const dotenv = require("dotenv/config");
 
 
 function routerApi(app){

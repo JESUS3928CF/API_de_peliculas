@@ -1,11 +1,15 @@
 const express = require('express');
 const { MongoClient, ObjectId, ClientSession } = require('mongodb'); //ObjectId: Para poder trabajar con id
 // const bodyparser = require('body-parser');
+const movieService = require("../services/movieService");
+require("dotenv").config();
 
-const uri = 'mongodb+srv://jesus3928cf:1234@cluster0.6sahaj9.mongodb.net/?retryWrites=true&w=majority';
+
+const uri = process.env.URL;
 
 const router = express.Router();
 
+const service = new movieService();
 /**
  * CRUD . CREATE , READ, UPDATE, DELETE
  */
@@ -13,25 +17,14 @@ const router = express.Router();
 //2. READ
 //2.1 find()
 router.get('/', async (req, res) => {
-    const client = new MongoClient(uri);
-    try {
-        await client.connect();
-        const movies = await client
-            .db('sample_mflix')
-            .collection('movies')
-            .find({})
-            .limit(10)
-            .toArray();
+    
+        const movies = service.findMany();
         if (movies) {
             res.status(200).send(movies);
         } else {
-            res.status(404).send('No se encontro la informacion');
+            res.status(404).send('No Fund');
         }
-    } catch (e) {
-        console.log(e);
-    } finally {
-        await client.close();
-    }
+    
 });
 
 //2.1 findOne()
@@ -114,30 +107,18 @@ router.post('/', async (req, res) => {
 // updateOne() Actualizamos solo un campo
 router.patch('/:id', async (req, res) => {
     const id = req.params.id;
-    const body = req.body;
-    const client = new MongoClient(uri);
-    try {
-        await client.connect();
-        const result = await client
-            .db('sample_mflix')
-            .collection('movies')
-            .updateOne(
-                { _id: new ObjectId(id) },
-                { $set: { title: body, year: body.year } }
-            );
-        if (result) {
-            res.status(201).json({
-                message: 'Se actualizo la pelicula',
-                result,
-                //data: body
-            });
-        } else {
-            res.status(400).send('No se actualizo la pelicula');
-        }
-    } catch (e) {
-        console.log(e);
-    } finally {
-        await client.close();
+    const {title, year} = req.body;
+
+    const resultado = await service.actualizarPelicula(id, title, year);
+
+    if (result) {
+        res.status(200).json({
+            message: 'Se actualizo la pelicula',
+            result,
+            //data: body
+        });
+    } else {
+        res.status(400).send('No se actualizo la pelicula');
     }
 });
 
