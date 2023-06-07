@@ -2,7 +2,7 @@ const express = require('express');
 const { MongoClient, ObjectId, ClientSession } = require('mongodb'); //ObjectId: Para poder trabajar con id
 const bodyparser = require('body-parser');
 require("dotenv").config();
-/// Funciones para llamar las rutas
+/// Funciones para llamar las rutas.
 const routerApi = require("./routes/index");
 
 
